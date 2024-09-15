@@ -5,6 +5,7 @@ import {
 } from '@discordjs/core';
 import { interactions, statefuls } from '../loader.js';
 import { GatewayEvent } from '../types.js';
+import { guildId } from '/utils/env.js';
 
 function findStateful(id: string, list: string[]): string | undefined {
     return list
@@ -29,6 +30,9 @@ export const interactionHandler = {
                     throw new Error(
                         `Command not defined for ${interaction.data.name}.`,
                     );
+
+                if (command.guildSpecific && interaction.guild_id !== guildId)
+                    return;
 
                 if (
                     interaction.type === InteractionType.ApplicationCommand &&

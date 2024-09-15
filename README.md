@@ -13,11 +13,8 @@ A custom Discord bot for Qbox's Discord server.
 
 ## Scripts
 
-- `npm run lint` - Lint your code with [Prettier]
-- `npm run format` - Format your code with [Prettier]
-- `npm run build` - Build your code with the [TypeScript] compiler
+- `npm run lint` - Lint your code
+- `npm run format` - Format your code
+- `npm run build` - Build your code
 - `npm run deploy` - Deploy commands to Discord
 - `npm run start` - Start your bot
-
-[prettier]: https://prettier.io
-[typescript]: https://typescriptlang.org
