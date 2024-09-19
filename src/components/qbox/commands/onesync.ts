@@ -4,6 +4,7 @@ import {
 } from '@discordjs/core';
 import {
     bold,
+    hideLinkEmbed,
     hyperlink,
     orderedList,
     unorderedList,
@@ -32,9 +33,10 @@ export const onesyncCommand = {
 
         const content = [
             bold(
-                `Qbox requires ${hyperlink('OneSync: Infinity', 'https://docs.fivem.net/docs/scripting-reference/onesync/')} to work correctly.`,
+                `Qbox requires ${hyperlink('OneSync: Infinity', hideLinkEmbed('https://docs.fivem.net/docs/scripting-reference/onesync/'))} to work correctly.`,
             ),
             'After completing the steps provided below, the next server start should have it enabled.',
+            `Note that having more than 48 player slots with OneSync requires a ${hyperlink('FiveM Patreon subscription', hideLinkEmbed('https://patreon.com/fivem'))}, with different memberships providing different amounts of player slots.`,
             '',
             bold('With txAdmin:'),
             orderedList([
