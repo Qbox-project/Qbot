@@ -8,7 +8,6 @@ export const plshelpMessageCommand = {
         type: ApplicationCommandType.Message,
         name: 'How to Ask for Help',
     },
-    guildSpecific: true,
     async execute({ api, data: interaction }) {
         await api.interactions.defer(interaction.id, interaction.token, {
             flags: MessageFlags.Ephemeral,

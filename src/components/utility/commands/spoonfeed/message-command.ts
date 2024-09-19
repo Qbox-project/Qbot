@@ -8,7 +8,6 @@ export const spoonfeedMessageCommand = {
         type: ApplicationCommandType.Message,
         name: 'How to Learn',
     },
-    guildSpecific: true,
     async execute({ api, data: interaction }) {
         await api.interactions.defer(interaction.id, interaction.token, {
             flags: MessageFlags.Ephemeral,
