@@ -15,7 +15,6 @@ export const resources = [
     'qbx_divegear',
     'qbx_diving',
     'qbx_garages',
-    'qbx_loading',
     'qbx_management',
     'qbx_radio',
     'qbx_smallresources',
