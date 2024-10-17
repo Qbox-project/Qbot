@@ -1,62 +1,58 @@
 import {
-    APIApplicationCommandOptionChoice,
     APIInteractionResponseCallbackData,
     ApplicationCommandOptionType,
     ApplicationCommandType,
 } from '@discordjs/core';
-import { userMention } from '@discordjs/formatters';
+import {
+    bold,
+    hideLinkEmbed,
+    hyperlink,
+    inlineCode,
+    userMention,
+} from '@discordjs/formatters';
+import {
+    fivemDocsUrl,
+    fivemNativesUrl,
+    githubUrl,
+    oxUrl,
+} from '../constants.js';
 import { ChatInputCommand } from '/components/types.js';
 import { mapChatInputOptionValues } from '/utils/interactions.js';
 
-const deprecated: Record<string, string> = {
-    qbx_loading:
-        'We no longer support qbx_loading, and use **loadscreen** by d4isdavid, download it here: <https://github.com/D4isDAVID/loadscreen>',
-    qbx_vehiclefailure:
-        'We no longer use qbx_vehiclefailure, instead we use vehiclehandler by QuantumMalice, download it here: <https://github.com/QuantumMalice/vehiclehandler>',
-    qbx_interior:
-        'We no longer support qbx_interior, all housing scripts use their own system',
-    qbx_prison:
-        "We don't use qbx_prison, as we are now using xt_prison made by xT, download it here: <https://github.com/xT-Development/xt-prison>",
-    qbx_traphouse: 'No information.',
-    qbx_apartments:
-        'We no longer use qbx_apartments, as qbx_properties took over its job, you can download it at: <https://github.com/Qbox-project/qbx_properties>',
-    qbx_houses:
-        'We no longer use qbx_houses, as qbx_properties took over its job, you can download it at: <https://github.com/Qbox-project/qbx_properties>',
-    qbx_lockpick:
-        'We no longer support qbx_lockpick, as we are now using the ox_lib native skillchecks.',
-    PolyZone:
-        'We no longer use polyzone, instead we use the ox_lib built-in zones for much better performance.',
-    connectqueue:
-        'We no longer have connectqueue, as it is now a **built-in** feature for qbx_core.',
-    qbx_tunerchip:
-        'We no longer use qbx_tunerchip, as it has been removed for users to replace.',
-    qbx_commandbinding:
-        "We no longer use qbx_commandbinding, instead use ox_lib's built in one.",
-    interact_sound:
-        'We no longer use interact-sound, as we are using native fivem audio for all of our audio or sound files.',
-    qbx_phone:
-        'We no longer support qbx_phone, as we switched over to npwd-phone, the best free phone made by Project Error, which you can download from here: <https://github.com/project-error/npwd>',
-    qbx_crypto: 'No information.',
-    qbx_weathersync:
-        'We no longer use qbx_weathersync, as we are using Renewed-Weathersync by Renewed-Scripts, which you can download at: <https://github.com/Renewed-Scripts/Renewed-Weathersync>',
-    qbx_fitbit: 'No information',
-    qbx_skillbar:
-        'We no longer support qbx_lockpick, as we are now using the ox_lib native skillchecks',
-    qbx_multicharacter:
-        'We no longer use qbx_multicharacter, as we have a built-in one inside of qbx_core.',
-    qbx_anticheat: 'No information',
-    qbx_printer: 'No information',
-    qbx_customs: 'No information',
-    qbx_hotdogjob: 'No information',
+const deprecated: Record<string, string | [string, string]> = {
+    connectqueue: ["Use qbx_core's built-in queue.", 'unused'],
+    interact_sound: [
+        `Use FiveM ${hyperlink('native audio', hideLinkEmbed(`${fivemNativesUrl}/?_0x7FF4944CC209192D`))} functionality.`,
+        'unused',
+    ],
+    PolyZone: `Use ${hyperlink(inlineCode('lib.zones'), hideLinkEmbed(`${oxUrl}/ox_lib/Modules/Zones/Shared`))}.`,
+    ['qbx-anticheat']: 'None. Anticheat resources are not recommended.',
+    qbx_apartments: `Use ${hyperlink('qbx_properties', hideLinkEmbed(`${githubUrl}/qbx_properties`))}.`,
+    qbx_commandbinding: `Use FiveM's native ${hyperlink(inlineCode('bind'), hideLinkEmbed(`${fivemDocsUrl}/client-manual/console-commands/#bind-mapper-input-command`))} command.`,
+    qbx_crypto: 'None.',
+    qbx_fitbit: 'None.',
+    ['qbx-hotdogjob']: 'None.',
+    qbx_houses: `Use ${hyperlink('qbx_properties', hideLinkEmbed(`${githubUrl}/qbx_properties`))}.`,
+    qbx_interior: 'None. Housing resources provide their own interior system.',
+    qbx_loading: `Use ${hyperlink('D4isDAVID/loadscreen', hideLinkEmbed('https://github.com/D4isDAVID/loadscreen'))}.`,
+    qbx_lockpick: `Use ${hyperlink(inlineCode('lib.skillCheck'), hideLinkEmbed(`${oxUrl}/ox_lib/Modules/Interface/Client/skillcheck`))} or a custom solution.`,
+    ['qbx-multicharacter']: "Use qbx_core's built-in character selection.",
+    qbx_phone: `Use ${hyperlink('project-error/npwd', hideLinkEmbed('https://github.com/project-error/npwd'))}.`,
+    ['qbx-printer']: 'None.',
+    qbx_prison: `Use ${hyperlink('xT-Development/xt-prison', hideLinkEmbed('https://github.com/xT-Development/xt-prison'))}.`,
+    qbx_skillbar: `Use ${hyperlink(inlineCode('lib.skillCheck'), hideLinkEmbed(`${oxUrl}/ox_lib/Modules/Interface/Client/skillcheck`))}.`,
+    qbx_traphouse: 'None.',
+    qbx_tunerchip: 'None.',
+    qbx_vehiclefailure: `Use ${hyperlink('QuantumMalice/vehiclehandler', hideLinkEmbed('https://github.com/QuantumMalice/vehiclehandler'))}.`,
+    qbx_weathersync: `Use ${hyperlink('Renewed-Scripts/Renewed-Weathersync', hideLinkEmbed('https://github.com/Renewed-Scripts/Renewed-Weathersync'))}.`,
 };
-const choices: APIApplicationCommandOptionChoice<string>[] = [];
-Object.keys(deprecated).forEach((k) => choices.push({ name: k, value: k }));
+const choices = Object.keys(deprecated).map((k) => ({ name: k, value: k }));
 
 export const deprecatedCommand = {
     data: {
         type: ApplicationCommandType.ChatInput,
         name: 'deprecated',
-        description: 'send information about a script being deprecated',
+        description: 'Send information about an archived or unused resource',
         options: [
             {
                 type: ApplicationCommandOptionType.String,
@@ -77,13 +73,19 @@ export const deprecatedCommand = {
         ) as { resource: string | undefined; mention: string | undefined };
 
         const response: APIInteractionResponseCallbackData = {
-            content: mention ? `${userMention(mention)}\n ` : '',
+            content: mention ? `${userMention(mention)} ` : '',
         };
-        if (resource) {
-            response.content! += deprecated[resource];
+
+        if (resource && resource in deprecated) {
+            const obj = deprecated[resource];
+            const alternative = typeof obj === 'string' ? obj : obj![0];
+            const keyword = typeof obj === 'string' ? 'archived' : obj![1];
+
+            response.content! += `${bold(`${resource} is ${keyword}.`)}
+Recommended alternative: ${alternative}`;
         } else {
-            response.content! += `**The resource you've mentioned is archived.**
-Sometimes we deem one of our own resources to be unnecessary, whether because we found an alternative solution or just because it isn't needed anymore.
+            response.content! += `${bold("The resource you've mentioned is archived or unused.")}
+Sometimes we deem a resource (sometimes one of our own) to be unnecessary or not up to par, whether because we found an alternative solution or just because it isn't needed anymore.
 In such cases, the GitHub repository for such resource will be archived—not accepting any more changes.
 You should use a recommended alternative instead.`;
         }

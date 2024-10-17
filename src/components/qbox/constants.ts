@@ -1,6 +1,8 @@
 export const siteUrl = 'https://qbox.re';
 export const docsUrl = 'https://docs.qbox.re';
 export const oxUrl = 'https://overextended.dev';
+export const fivemDocsUrl = 'https://docs.fivem.net/docs';
+export const fivemNativesUrl = 'https://docs.fivem.net/natives';
 export const githubUrl = `https://github.com/Qbox-project`;
 export const githubReposApi = 'https://api.github.com/repos/Qbox-project';
 export const metricsResourceApi = 'https://api.5metrics.dev/getResource';
