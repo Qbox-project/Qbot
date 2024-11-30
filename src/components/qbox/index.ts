@@ -9,7 +9,7 @@ import { recipesCommand } from './commands/recipes.js';
 import { resourceCommand } from './commands/resource.js';
 import { supportCommand } from './commands/support/chat-input-command.js';
 import { supportMessageCommand } from './commands/support/message-command.js';
-import { messageListener } from './imageErrorRecognition.js';
+import { imageErrorRecognition } from './imageErrorRecognition.js';
 
 export default {
     commands: [
@@ -24,5 +24,5 @@ export default {
         supportCommand,
         supportMessageCommand,
     ],
-    gatewayEvents: [messageListener],
+    gatewayEvents: [imageErrorRecognition],
 } satisfies Component;

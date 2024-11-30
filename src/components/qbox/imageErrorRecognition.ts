@@ -33,24 +33,24 @@ async function parseImage(url: string) {
         let parsedText = parsedResult.ParsedText || null;
         return parsedText;
     } else {
-        return null;
+        return;
     }
 }
 
 async function parseMessage(url: string) {
     let parsedText = await parseImage(url);
     if (!parsedText) {
-        return undefined;
+        return;
     }
     for (const key in errorMessages) {
         if (parsedText.toLowerCase().includes(key.toLowerCase())) {
             return errorMessages[key as keyof typeof errorMessages];
         }
     }
-    return undefined;
+    return;
 }
 
-export const messageListener = {
+export const imageErrorRecognition = {
     name: GatewayDispatchEvents.MessageCreate,
     type: 'on',
     async execute({ api, data: message }) {
