@@ -5,8 +5,8 @@ import { env } from 'node:process';
 
 export const botToken = env.BOT_TOKEN ?? '';
 export const guildId = env.GUILD_ID ?? '';
-export const apiKey = env.IMAGE_API ?? '';
-export const apiUrl = env.IMAGE_URL ?? '';
+export const ocrSpaceKey = env.OCR_SPACE_API ?? '';
+export const ocrSpaceUrl = env.OCR_SPACE_URL ?? '';
 export const rest = new REST({ version: '10' }).setToken(botToken);
 export const gateway = new WebSocketManager({
     token: botToken,

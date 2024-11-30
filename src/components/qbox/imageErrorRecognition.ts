@@ -1,5 +1,5 @@
 import { GatewayDispatchEvents } from '@discordjs/core';
-import { apiKey, apiUrl } from '../../utils/env.js';
+import { ocrSpaceKey, ocrSpaceUrl } from '../../utils/env.js';
 import { GatewayEvent } from '../types.js';
 
 let errorMessages = {
@@ -16,10 +16,10 @@ let errorMessages = {
 };
 
 async function parseImage(url: string) {
-    const response = await fetch(apiUrl, {
+    const response = await fetch(ocrSpaceUrl, {
         method: 'POST',
         headers: {
-            apikey: apiKey,
+            apikey: ocrSpaceKey,
             'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: new URLSearchParams({
