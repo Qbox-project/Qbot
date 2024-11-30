@@ -57,40 +57,35 @@ export const messageListener = {
     name: GatewayDispatchEvents.MessageCreate,
     type: 'on',
     async execute({ api, data: message }) {
-        if (message.attachments.length > 0) {
-            message.attachments.forEach(async ({ url }) => {
-                const isImage =
-                    url.includes('.png') ||
-                    url.includes('.jpg') ||
-                    url.includes('.jpeg');
-                console.log(isImage);
-                if (isImage) {
-                    await api.channels.addMessageReaction(
-                        message.channel_id,
-                        message.id,
-                        '🔍',
-                    );
-                    let result = await parseMessage(url);
-                    await api.channels.deleteOwnMessageReaction(
-                        message.channel_id,
-                        message.id,
-                        '🔍',
-                    );
+        if (message.attachments.length <= 0) return;
 
-                    if (!result) {
-                        return;
-                    } else {
-                        await api.channels.createMessage(message.channel_id, {
-                            content:
-                                result +
-                                '\n\n-# Do you think this was a mistake? We are trying to improve our Image Recognition and any suggestions are welcome.',
-                            message_reference: {
-                                message_id: message.id,
-                            },
-                        });
-                    }
-                }
+        message.attachments.forEach(async ({ url }) => {
+            const isImage =
+                url.includes('.png') ||
+                url.includes('.jpg') ||
+                url.includes('.jpeg');
+            if (!isImage) return;
+            await api.channels.addMessageReaction(
+                message.channel_id,
+                message.id,
+                '🔍',
+            );
+            let result = await parseMessage(url);
+            await api.channels.deleteOwnMessageReaction(
+                message.channel_id,
+                message.id,
+                '🔍',
+            );
+
+            if (!result) return;
+            await api.channels.createMessage(message.channel_id, {
+                content:
+                    result +
+                    '\n\n-# Do you think this was a mistake? We are trying to improve our Image Recognition and any suggestions are welcome.',
+                message_reference: {
+                    message_id: message.id,
+                },
             });
-        }
+        });
     },
 } satisfies GatewayEvent<GatewayDispatchEvents.MessageCreate>;
