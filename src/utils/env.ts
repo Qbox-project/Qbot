@@ -10,10 +10,7 @@ export const ocrSpaceUrl = env.OCR_SPACE_URL ?? '';
 export const rest = new REST({ version: '10' }).setToken(botToken);
 export const gateway = new WebSocketManager({
     token: botToken,
-    intents:
-        GatewayIntentBits.Guilds |
-        GatewayIntentBits.GuildMessages |
-        GatewayIntentBits.MessageContent,
+    intents: GatewayIntentBits.GuildMessages | GatewayIntentBits.MessageContent,
     rest,
 });
 
