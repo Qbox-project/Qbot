@@ -24,10 +24,7 @@ async function parseImage(url: string) {
         },
         body: new URLSearchParams({
             language: 'eng',
-            isOverlayRequired: 'true',
             url: url,
-            iscreatesearchablepdf: 'false',
-            issearchablepdfhidetextlayer: 'false',
         }),
     });
     const data: any = await response.json();
