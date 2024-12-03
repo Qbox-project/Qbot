@@ -7,12 +7,13 @@ import {
     userMention,
 } from '@discordjs/formatters';
 
-export function spoonfeedMessage(userId?: Snowflake) {
+export function resourcesMessage(userId?: Snowflake) {
     const content = [
-        bold('Information will not be spoonfed to you.'),
-        'You are expected to be able to learn and understand programming concepts.',
-        'Understand that even if you are "new to this dev stuff", we all started off with no knowledge in the space.',
-        'Just as we take our time and learn, you are advised to do the same. Here are a few links to help you start:',
+        'Learning programming can be both exciting and challenging, especially when you\'re starting out.',
+        'Diving into code, exploring resources, and experimenting are essential parts of the journey.',
+        'While it takes time and effort to develop your skills, we encourage curiosity and a growth mindset.',
+        'Whether you\'re an experienced programmer or new to FiveM development and Lua, we\'re here to support your learning.',
+        bold('Below are some excellent resources curated by the Qbox team to help you get started:'),
         unorderedList([
             hyperlink('Lua Docs', hideLinkEmbed('https://lua.org/docs.html')),
             hyperlink(
