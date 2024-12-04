@@ -12,7 +12,7 @@ export default {
         letmegooglethatCommand,
         plshelpCommand,
         plshelpMessageCommand,
-        spoonfeedCommand,
-        spoonfeedMessageCommand,
+        resourcesCommand,
+        resourcesMessageCommand,
     ],
 } satisfies Component;
