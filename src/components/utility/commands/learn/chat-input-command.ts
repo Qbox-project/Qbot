@@ -2,14 +2,14 @@ import {
     ApplicationCommandOptionType,
     ApplicationCommandType,
 } from '@discordjs/core';
-import { spoonfeedMessage } from './message.js';
+import { learnMessage } from './message.js';
 import { ChatInputCommand } from '/components/types.js';
 import { mapChatInputOptionValues } from '/utils/interactions.js';
 
-export const spoonfeedCommand = {
+export const learnCommand = {
     data: {
         type: ApplicationCommandType.ChatInput,
-        name: 'spoonfeed',
+        name: 'learn',
         description: 'Send information about how to learn',
         options: [
             {
@@ -25,7 +25,7 @@ export const spoonfeedCommand = {
         };
 
         await api.interactions.reply(interaction.id, interaction.token, {
-            content: spoonfeedMessage(mention),
+            content: learnMessage(mention),
         });
     },
 } satisfies ChatInputCommand;
