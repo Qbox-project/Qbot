@@ -1,9 +1,9 @@
 import { ApplicationCommandType, MessageFlags } from '@discordjs/core';
 import { messageLink, subtext, userMention } from '@discordjs/formatters';
-import { resourcesMessage } from './message.js';
+import { learnMessage } from './message.js';
 import { MessageCommand } from '/components/types.js';
 
-export const resourcesMessageCommand = {
+export const learnMessageCommand = {
     data: {
         type: ApplicationCommandType.Message,
         name: 'How to Learn',
@@ -18,7 +18,7 @@ export const resourcesMessageCommand = {
             interaction.channel.id,
             {
                 content: [
-                    resourcesMessage(),
+                    learnMessage(),
                     subtext(`Sent by ${userMention(user.id)}`),
                 ].join('\n'),
                 message_reference: { message_id: interaction.data.target_id },

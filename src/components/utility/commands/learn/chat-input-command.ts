@@ -2,14 +2,14 @@ import {
     ApplicationCommandOptionType,
     ApplicationCommandType,
 } from '@discordjs/core';
-import { resourcesMessage } from './message.js';
+import { learnMessage } from './message.js';
 import { ChatInputCommand } from '/components/types.js';
 import { mapChatInputOptionValues } from '/utils/interactions.js';
 
-export const resourcesCommand = {
+export const learnCommand = {
     data: {
         type: ApplicationCommandType.ChatInput,
-        name: 'resources',
+        name: 'learn',
         description: 'Send information about how to learn',
         options: [
             {
@@ -25,7 +25,7 @@ export const resourcesCommand = {
         };
 
         await api.interactions.reply(interaction.id, interaction.token, {
-            content: resourcesMessage(mention),
+            content: learnMessage(mention),
         });
     },
 } satisfies ChatInputCommand;

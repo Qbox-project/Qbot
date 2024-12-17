@@ -7,7 +7,7 @@ import {
     userMention,
 } from '@discordjs/formatters';
 
-export function resourcesMessage(userId?: Snowflake) {
+export function learnMessage(userId?: Snowflake) {
     const content = [
         "Learning programming can be both exciting and challenging, especially when you're starting out.",
         'Diving into code, exploring resources, and experimenting are essential parts of the journey.',
