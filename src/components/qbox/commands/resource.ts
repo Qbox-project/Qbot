@@ -17,6 +17,7 @@ import {
 import { ChatInputCommand } from '/components/types.js';
 import { fetchJson } from '/utils/http-request.js';
 import { mapChatInputOptionValues } from '/utils/interactions.js';
+import { search } from '/utils/search.js';
 
 interface GitHubRepository {
     subscribers_count: number;
@@ -140,9 +141,10 @@ export const resourceCommand = {
             interaction.id,
             interaction.token,
             {
-                choices: resources
-                    .filter((r) => r.startsWith(value))
-                    .map((r) => ({ name: r, value: r })),
+                choices: search(resources, value).map((r) => ({
+                    name: r,
+                    value: r,
+                })),
             },
         );
     },
