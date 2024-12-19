@@ -19,10 +19,10 @@
     "@discordjs/ws": "^2.0.0"
   },
   "devDependencies": {
-    "@types/node": "^22.5.5",
-    "prettier": "^3.3.3",
+    "@types/node": "^22.10.2",
+    "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
     "tsc-alias": "^1.8.10",
-    "typescript": "^5.6.2"
+    "typescript": "^5.7.2"
   }
 }
