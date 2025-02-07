@@ -82,7 +82,9 @@ export const docsCommand = {
             response.content! += [
                 docs[link] ??
                     `Please read our documentation on ${link.replace('resources/', '')}:`,
-                hideLinkEmbed(`${docsUrl}/${link}`),
+                hideLinkEmbed(
+                    `${docsUrl}/${link == 'introduction' ? '' : link}`,
+                ),
             ].join('\n');
         }
 
