@@ -1,7 +1,7 @@
 import {
     APIInteractionResponseCallbackData,
     ApplicationCommandOptionType,
-    ApplicationCommandType
+    ApplicationCommandType,
 } from '@discordjs/core';
 import { hideLinkEmbed, userMention } from '@discordjs/formatters';
 import { docsUrl } from '../constants.js';

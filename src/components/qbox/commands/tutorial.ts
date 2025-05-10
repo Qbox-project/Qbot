@@ -1,7 +1,7 @@
 import {
     APIInteractionResponseCallbackData,
     ApplicationCommandOptionType,
-    ApplicationCommandType
+    ApplicationCommandType,
 } from '@discordjs/core';
 import { hideLinkEmbed, userMention } from '@discordjs/formatters';
 import { docsUrl } from '../constants.js';
@@ -10,8 +10,10 @@ import { mapChatInputOptionValues } from '/utils/interactions.js';
 
 const docs: Record<string, string> = {
     'how-fxmanifests-work': 'Learn how fxmanifests work with FiveM:',
-    'vscode-setup': 'Learn how to set up VSCode for FiveM and RedM Lua scripting:',
-    'install-custom-weapons': 'Learn how to install custom weapons in Qbox using ox_inventory:',
+    'vscode-setup':
+        'Learn how to set up VSCode for FiveM and RedM Lua scripting:',
+    'install-custom-weapons':
+        'Learn how to install custom weapons in Qbox using ox_inventory:',
 };
 
 export const tutorialCommand = {
