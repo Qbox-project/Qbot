@@ -7,7 +7,6 @@ import {
 import { hyperlink, inlineCode } from '@discordjs/formatters';
 import {
     color,
-    docsUrl,
     githubReposApi,
     githubUrl,
     icon,
@@ -62,13 +61,6 @@ function embed(
             },
         ],
     };
-
-    if (resources.includes(resource)) {
-        embed.fields!.unshift({
-            name: 'Documentation',
-            value: `${docsUrl}/resources/${resource}`,
-        });
-    }
 
     if (release) {
         embed.fields!.unshift({

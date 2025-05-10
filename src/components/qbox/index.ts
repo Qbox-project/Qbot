@@ -9,6 +9,8 @@ import { recipesCommand } from './commands/recipes.js';
 import { resourceCommand } from './commands/resource.js';
 import { supportCommand } from './commands/support/chat-input-command.js';
 import { supportMessageCommand } from './commands/support/message-command.js';
+import { tebexCommand } from './commands/tebex.js';
+import { tutorialCommand } from './commands/tutorial.js';
 
 export default {
     commands: [
@@ -22,5 +24,7 @@ export default {
         resourceCommand,
         supportCommand,
         supportMessageCommand,
+        tebexCommand,
+        tutorialCommand,
     ],
 } satisfies Component;
