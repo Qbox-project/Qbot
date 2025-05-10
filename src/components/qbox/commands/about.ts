@@ -26,8 +26,8 @@ const embed: APIEmbed = {
             value: githubUrl,
         },
         {
-            name: 'Overextended',
-            value: `We heavily rely on Overextended's resources.\n${oxUrl}`,
+            name: 'Community Ox',
+            value: `We heavily rely on Community Ox's resources.\n${oxUrl}`,
         },
     ],
 };

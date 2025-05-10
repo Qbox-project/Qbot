@@ -8,7 +8,7 @@ import { ChatInputCommand } from '/components/types.js';
 import { mapChatInputOptionValues } from '/utils/interactions.js';
 
 const invites: Record<string, string> = {
-    ox: 'https://discord.overextended.dev/',
+    ox: 'https://discord.coxdocs.dev/',
     'project-error': 'https://discord.gg/uy5N7jT5aJ',
     txAdmin: 'https://discord.gg/yWxjt9zPWR',
     cfx: 'https://discord.gg/fivem',
@@ -26,7 +26,7 @@ export const guildCommand = {
                 description: 'The server name',
                 required: true,
                 choices: [
-                    { name: 'Overextended', value: 'ox' },
+                    { name: 'Community Ox', value: 'cox' },
                     { name: 'Project Error', value: 'project-error' },
                     { name: 'txAdmin', value: 'txAdmin' },
                     { name: 'Cfx.re', value: 'cfx' },
