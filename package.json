@@ -16,7 +16,8 @@
     "@discordjs/formatters": "^0.5.0",
     "@discordjs/rest": "^2.4.0",
     "@discordjs/util": "^1.1.1",
-    "@discordjs/ws": "^2.0.0"
+    "@discordjs/ws": "^2.0.0",
+    "rss-to-json": "^2.1.1"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
