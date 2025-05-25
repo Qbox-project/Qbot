@@ -11,6 +11,6 @@ COPY . .
 RUN npm run lint
 RUN npm run format
 RUN npm run build
-RUN npm run deploy
+RUN echo "# Empty env file to satisfy build process" > .env
 
-CMD ["npm", "run", "start"]
+CMD ["sh", "-c", "npm run deploy && npm run start"]
