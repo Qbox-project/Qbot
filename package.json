@@ -4,8 +4,8 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "lint": "prettier --ignore-path .gitignore -c .",
-    "format": "prettier --ignore-path .gitignore -w .",
+    "lint": "prettier --ignore-path .gitignore --ignore-path .prettierignore -c .",
+    "format": "prettier --ignore-path .gitignore --ignore-path .prettierignore -w .",
     "build": "rimraf dist && tsc && tsc-alias",
     "deploy": "node --env-file=.env dist/deploy.js",
     "start": "node --env-file=.env ."
