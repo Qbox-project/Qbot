@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  discord-bot:
+    build: .
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - BOT_TOKEN=${BOT_TOKEN}
+      - GUILD_ID=${GUILD_ID}
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
