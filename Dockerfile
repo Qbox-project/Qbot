@@ -1,16 +1,22 @@
-FROM node:20
+FROM node:20-alpine AS base
 
 WORKDIR /app
 
-COPY package*.json ./
-
-RUN npm install
+FROM base AS deps
 
 COPY . .
+RUN npm ci --production
 
-RUN npm run lint
-RUN npm run format
+FROM deps AS build
+
+RUN npm ci --production=false
 RUN npm run build
-RUN echo "# Empty env file to satisfy build process" > .env
 
-CMD ["sh", "-c", "npm run deploy && npm run start"]
+FROM base AS final
+
+COPY package.json .
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=build /app/dist ./dist
+
+CMD ["npm", "run", "start:prod"]
