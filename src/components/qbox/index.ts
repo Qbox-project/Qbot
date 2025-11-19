@@ -4,6 +4,7 @@ import { builtinCommand } from './commands/builtin.js';
 import { compatCommand } from './commands/compat.js';
 import { deprecatedCommand } from './commands/deprecated.js';
 import { docsCommand } from './commands/docs.js';
+import { mariadbCommand } from './commands/mariadb.js';
 import { onesyncCommand } from './commands/onesync.js';
 import { recipesCommand } from './commands/recipes.js';
 import { resourceCommand } from './commands/resource.js';
@@ -18,6 +19,7 @@ export default {
         compatCommand,
         deprecatedCommand,
         docsCommand,
+        mariadbCommand,
         onesyncCommand,
         recipesCommand,
         resourceCommand,
