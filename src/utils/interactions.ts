@@ -6,6 +6,7 @@ import {
     APIChatInputApplicationCommandInteractionData,
     APIModalSubmission,
     ApplicationCommandOptionType,
+    ComponentType,
 } from '@discordjs/core';
 
 type MappedChatInputOptionValues = Record<string, string | number | boolean>;
@@ -47,11 +48,13 @@ export function mapChatInputOptionValues({
 export function mapModalTextInputValues({
     components,
 }: APIModalSubmission): Record<string, string> {
-    return components.reduce(
-        (values, { components: [textInput] }) => {
-            values[textInput!.custom_id] = textInput!.value;
-            return values;
-        },
-        {} as Record<string, string>,
-    );
+    return components
+        .filter((c) => c.type === ComponentType.ActionRow)
+        .reduce(
+            (values, { components: [textInput] }) => {
+                values[textInput!.custom_id] = textInput!.value;
+                return values;
+            },
+            {} as Record<string, string>,
+        );
 }

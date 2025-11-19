@@ -1,4 +1,4 @@
-import { APIEmbed, ApplicationCommandType } from '@discordjs/core';
+import { APIEmbed } from '@discordjs/core';
 import {
     color,
     docsUrl,
@@ -7,7 +7,7 @@ import {
     oxUrl,
     siteUrl,
 } from '../constants.js';
-import { ChatInputCommand } from '/components/types.js';
+import { createQuickReplyChatInputCommand } from '/utils/quick-reply.js';
 
 const embed: APIEmbed = {
     url: siteUrl,
@@ -32,15 +32,10 @@ const embed: APIEmbed = {
     ],
 };
 
-export const aboutCommand = {
+export const aboutCommand = createQuickReplyChatInputCommand({
     data: {
-        type: ApplicationCommandType.ChatInput,
         name: 'about',
         description: 'About Qbox Project',
     },
-    async execute({ api, data: interaction }) {
-        await api.interactions.reply(interaction.id, interaction.token, {
-            embeds: [embed],
-        });
-    },
-} satisfies ChatInputCommand;
+    message: { embeds: [embed] },
+});

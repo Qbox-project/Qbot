@@ -7,8 +7,7 @@ import { docsCommand } from './commands/docs.js';
 import { onesyncCommand } from './commands/onesync.js';
 import { recipesCommand } from './commands/recipes.js';
 import { resourceCommand } from './commands/resource.js';
-import { supportCommand } from './commands/support/chat-input-command.js';
-import { supportMessageCommand } from './commands/support/message-command.js';
+import { supportCommand, supportMessageCommand } from './commands/support.js';
 import { tebexCommand } from './commands/tebex.js';
 import { tutorialCommand } from './commands/tutorial.js';
 
