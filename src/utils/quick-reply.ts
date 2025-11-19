@@ -1,5 +1,9 @@
 import {
+    API,
+    APIApplicationCommandSubcommandOption,
     APIChatInputApplicationCommandInteraction,
+    APIChatInputApplicationCommandInteractionData,
+    APIInteraction,
     APIMessageApplicationCommandInteraction,
     ApplicationCommandOptionType,
     ApplicationCommandType,
@@ -7,7 +11,11 @@ import {
     MessageFlags,
 } from '@discordjs/core';
 import { messageLink, subtext, userMention } from '@discordjs/formatters';
-import { mapChatInputOptionValues } from './interactions.js';
+import {
+    mapChatInputOptionValues,
+    MappedChatInputOptionValues,
+} from './interactions.js';
+import { Subcommand } from './subcommands.js';
 import {
     ChatInputCommand,
     InteractionData,
@@ -17,53 +25,90 @@ import {
 interface QuickReplyChatInputProps {
     data: Omit<
         InteractionData<APIChatInputApplicationCommandInteraction>,
-        'type' | 'options'
+        'type'
     >;
     guildSpecific?: boolean;
     withOptionalMention?: boolean;
-    message: CreateMessageOptions;
+    withSeparateMessage?: boolean;
+    message:
+        | CreateMessageOptions
+        | ((options: MappedChatInputOptionValues) => CreateMessageOptions);
 }
 
 export function createQuickReplyChatInputCommand({
     data,
     guildSpecific = false,
     withOptionalMention = false,
+    withSeparateMessage = false,
     message,
 }: QuickReplyChatInputProps) {
     return {
         data: {
             ...data,
-            type: ApplicationCommandType.ChatInput,
             options: withOptionalMention
                 ? [
+                      ...(data.options || []),
                       {
                           type: ApplicationCommandOptionType.User,
                           name: 'mention',
                           description: 'An optional user to mention',
                       },
                   ]
-                : undefined,
+                : data.options || [],
         },
         guildSpecific,
         async execute({ data: interaction, api }) {
-            const { mention: userId } = mapChatInputOptionValues(
+            await sendInteractionReply(
+                api,
+                interaction,
                 interaction.data,
-            ) as {
-                mention: string | undefined;
-            };
-
-            const mention = userId
-                ? `${subtext(userMention(userId))}\n`
-                : undefined;
-
-            const content = `${mention ?? ''}${message.content ?? ''}`;
-
-            await api.interactions.reply(interaction.id, interaction.token, {
-                ...message,
-                content,
-            });
+                message,
+                withSeparateMessage,
+            );
         },
     } satisfies ChatInputCommand;
+}
+
+interface QuickReplySubcommandProps {
+    data: APIApplicationCommandSubcommandOption;
+    withOptionalMention?: boolean;
+    withSeparateMessage?: boolean;
+    message:
+        | CreateMessageOptions
+        | ((options: MappedChatInputOptionValues) => CreateMessageOptions);
+}
+
+export function createQuickReplySubcommand<G extends boolean>({
+    data,
+    withOptionalMention = false,
+    withSeparateMessage = false,
+    message,
+}: QuickReplySubcommandProps) {
+    return {
+        data: {
+            ...data,
+            type: ApplicationCommandOptionType.Subcommand,
+            options: withOptionalMention
+                ? [
+                      ...(data.options || []),
+                      {
+                          type: ApplicationCommandOptionType.User,
+                          name: 'mention',
+                          description: 'An optional user to mention',
+                      },
+                  ]
+                : data.options || [],
+        },
+        async execute({ data: interaction, api, subcommandData }) {
+            await sendInteractionReply(
+                api,
+                interaction,
+                subcommandData,
+                message,
+                withSeparateMessage,
+            );
+        },
+    } satisfies Subcommand<G>;
 }
 
 interface QuickReplyMessageProps {
@@ -87,34 +132,69 @@ export function createQuickReplyMessageCommand({
         },
         guildSpecific,
         async execute({ data: interaction, api }) {
-            await api.interactions.defer(interaction.id, interaction.token, {
-                flags: MessageFlags.Ephemeral,
-            });
-
             const user = interaction.user ?? interaction.member!.user;
             const footer = subtext(`Sent by ${userMention(user.id)}`);
 
-            const createdMessage = await api.channels.createMessage(
-                interaction.channel.id,
-                {
-                    ...message,
-                    content: `${message.content ?? ''}\n${footer}`,
-                    message_reference: {
-                        message_id: interaction.data.target_id,
-                    },
+            await sendMessageReply(api, interaction, {
+                ...message,
+                content: `${message.content ?? ''}\n${footer}`,
+                message_reference: {
+                    message_id: interaction.data.target_id,
                 },
-            );
-
-            await api.interactions.editReply(
-                interaction.application_id,
-                interaction.token,
-                {
-                    content: messageLink(
-                        createdMessage.channel_id,
-                        createdMessage.id,
-                    ),
-                },
-            );
+            });
         },
     } satisfies MessageCommand;
+}
+
+async function sendInteractionReply(
+    api: API,
+    interaction: APIInteraction,
+    data:
+        | APIChatInputApplicationCommandInteractionData
+        | APIApplicationCommandSubcommandOption,
+    message:
+        | CreateMessageOptions
+        | ((options: MappedChatInputOptionValues) => CreateMessageOptions),
+    withSeparateMessage: boolean,
+) {
+    const values = mapChatInputOptionValues(data);
+
+    const messageProps =
+        typeof message === 'function' ? message(values) : message;
+
+    if (withSeparateMessage) {
+        await sendMessageReply(api, interaction, messageProps);
+        return;
+    }
+
+    const userId = values.mention as string | undefined;
+    const mention = userId ? `${subtext(userMention(userId))}\n` : undefined;
+
+    await api.interactions.reply(interaction.id, interaction.token, {
+        ...messageProps,
+        content: `${mention ?? ''}${messageProps.content ?? ''}`,
+    });
+}
+
+async function sendMessageReply(
+    api: API,
+    interaction: APIInteraction,
+    message: CreateMessageOptions,
+) {
+    await api.interactions.defer(interaction.id, interaction.token, {
+        flags: MessageFlags.Ephemeral,
+    });
+
+    const createdMessage = await api.channels.createMessage(
+        interaction.channel!.id,
+        message,
+    );
+
+    await api.interactions.editReply(
+        interaction.application_id,
+        interaction.token,
+        {
+            content: messageLink(createdMessage.channel_id, createdMessage.id),
+        },
+    );
 }

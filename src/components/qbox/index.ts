@@ -11,6 +11,7 @@ import { recipesCommand } from './commands/recipes.js';
 import { resourceCommand } from './commands/resource.js';
 import { supportCommand, supportMessageCommand } from './commands/support.js';
 import { tebexCommand } from './commands/tebex.js';
+import { ticketreplyCommand } from './commands/ticketreply.js';
 import { tutorialCommand } from './commands/tutorial.js';
 
 export default {
@@ -28,6 +29,7 @@ export default {
         supportCommand,
         supportMessageCommand,
         tebexCommand,
+        ticketreplyCommand,
         tutorialCommand,
     ],
 } satisfies Component;

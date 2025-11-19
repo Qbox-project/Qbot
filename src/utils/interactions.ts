@@ -9,7 +9,10 @@ import {
     ComponentType,
 } from '@discordjs/core';
 
-type MappedChatInputOptionValues = Record<string, string | number | boolean>;
+export type MappedChatInputOptionValues = Record<
+    string,
+    string | number | boolean
+>;
 
 function isBasicOption(
     option:
