@@ -6,6 +6,7 @@ import { deprecatedCommand } from './commands/deprecated.js';
 import { docsCommand } from './commands/docs.js';
 import { mariadbCommand } from './commands/mariadb.js';
 import { onesyncCommand } from './commands/onesync.js';
+import { portsCommand } from './commands/ports.js';
 import { recipesCommand } from './commands/recipes.js';
 import { resourceCommand } from './commands/resource.js';
 import { supportCommand, supportMessageCommand } from './commands/support.js';
@@ -21,6 +22,7 @@ export default {
         docsCommand,
         mariadbCommand,
         onesyncCommand,
+        portsCommand,
         recipesCommand,
         resourceCommand,
         supportCommand,
