@@ -3,6 +3,7 @@ import {
     ApplicationCommandType,
     ApplicationIntegrationType,
     InteractionContextType,
+    PermissionFlagsBits,
 } from '@discordjs/core';
 import { bold, channelLink } from '@discordjs/formatters';
 import { createQuickReplySubcommand } from '/utils/quick-reply.js';
@@ -38,7 +39,7 @@ export const ticketreplyCommand = createSubcommandsCommand(
             description: 'Ticket replies',
             contexts: [InteractionContextType.Guild],
             integration_types: [ApplicationIntegrationType.GuildInstall],
-            default_member_permissions: '0',
+            default_member_permissions: `${PermissionFlagsBits.ManageGuild}`,
         },
         guildSpecific: true,
     },
