@@ -1,8 +1,4 @@
-import {
-    bold,
-    hideLinkEmbed,
-    hyperlink
-} from '@discordjs/formatters';
+import { bold, hideLinkEmbed, hyperlink } from '@discordjs/formatters';
 import { createQuickReplyChatInputCommand } from '/utils/quick-reply.js';
 
 const content = `${bold(`Qbox requires an up-to-date ${hyperlink('MariaDB', hideLinkEmbed('https://mariadb.org/download'))} instance to work correctly.`)}
