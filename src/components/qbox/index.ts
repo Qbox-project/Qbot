@@ -5,6 +5,7 @@ import { compatCommand } from './commands/compat.js';
 import { deprecatedCommand } from './commands/deprecated.js';
 import { docsCommand } from './commands/docs.js';
 import { mariadbCommand } from './commands/mariadb.js';
+import { motdCommand } from './commands/motd.js';
 import { onesyncCommand } from './commands/onesync.js';
 import { portsCommand } from './commands/ports.js';
 import { recipesCommand } from './commands/recipes.js';
@@ -22,6 +23,7 @@ export default {
         deprecatedCommand,
         docsCommand,
         mariadbCommand,
+        motdCommand,
         onesyncCommand,
         portsCommand,
         recipesCommand,
