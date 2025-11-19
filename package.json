@@ -13,18 +13,18 @@
   },
   "dependencies": {
     "@discordjs/collection": "^2.1.1",
-    "@discordjs/core": "^2.0.0",
-    "@discordjs/formatters": "^0.5.0",
-    "@discordjs/rest": "^2.4.0",
-    "@discordjs/util": "^1.1.1",
-    "@discordjs/ws": "^2.0.0",
+    "@discordjs/core": "^2.4.0",
+    "@discordjs/formatters": "^0.6.2",
+    "@discordjs/rest": "^2.6.0",
+    "@discordjs/util": "^1.2.0",
+    "@discordjs/ws": "^2.0.4",
     "rss-to-json": "^2.1.1"
   },
   "devDependencies": {
-    "@types/node": "^22.10.2",
-    "prettier": "^3.4.2",
-    "rimraf": "^6.0.1",
-    "tsc-alias": "^1.8.10",
-    "typescript": "^5.7.2"
+    "@types/node": "^24.10.1",
+    "prettier": "^3.6.2",
+    "rimraf": "^6.1.0",
+    "tsc-alias": "^1.8.16",
+    "typescript": "^5.9.3"
   }
 }
