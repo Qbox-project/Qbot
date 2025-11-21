@@ -3,6 +3,7 @@ export const docsUrl = 'https://docs.qbox.re';
 export const oxUrl = 'https://coxdocs.dev';
 export const fivemDocsUrl = 'https://docs.fivem.net/docs';
 export const fivemNativesUrl = 'https://docs.fivem.net/natives';
+export const fivemTosUrl = 'https://fivem.net/terms';
 export const githubUrl = `https://github.com/Qbox-project`;
 export const githubReposApi = 'https://api.github.com/repos/Qbox-project';
 export const metricsResourceUrl = 'https://5metrics.dev/resource';

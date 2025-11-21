@@ -4,6 +4,7 @@ import { builtinCommand } from './commands/builtin.js';
 import { compatCommand } from './commands/compat.js';
 import { deprecatedCommand } from './commands/deprecated.js';
 import { docsCommand } from './commands/docs.js';
+import { gamehostsCommand } from './commands/gamehosts.js';
 import { mariadbCommand } from './commands/mariadb.js';
 import { motdCommand } from './commands/motd.js';
 import { onesyncCommand } from './commands/onesync.js';
@@ -22,6 +23,7 @@ export default {
         compatCommand,
         deprecatedCommand,
         docsCommand,
+        gamehostsCommand,
         mariadbCommand,
         motdCommand,
         onesyncCommand,
