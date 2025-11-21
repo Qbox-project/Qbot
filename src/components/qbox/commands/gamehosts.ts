@@ -1,6 +1,11 @@
-import { bold, hideLinkEmbed, hyperlink, unorderedList } from "@discordjs/formatters";
-import { fivemTosUrl } from "../constants.js";
-import { createQuickReplyChatInputCommand } from "/utils/quick-reply.js";
+import {
+    bold,
+    hideLinkEmbed,
+    hyperlink,
+    unorderedList,
+} from '@discordjs/formatters';
+import { fivemTosUrl } from '../constants.js';
+import { createQuickReplyChatInputCommand } from '/utils/quick-reply.js';
 
 const content = `${bold(`Do not use FiveM game server hosts.`)}
 Not only are game server hosts against the ${hyperlink('FiveM PLA', hideLinkEmbed(fivemTosUrl))} (with a few exceptions), but most of them come with issues, such as:
