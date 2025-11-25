@@ -7,13 +7,8 @@ import {
 import { createQuickReplyChatInputCommand } from '/utils/quick-reply.js';
 
 const content = `${bold(`Do not use FiveM anti-cheats.`)}
-Pretty much any FiveM anticheat out there wants to claim they solve the cheater problem. Yet, instead, all they do is provide problems, such as:
-${unorderedList([
-    'Breaking your server',
-    'Breaking your resources',
-    "Imploding your server's performance",
-    'and much more...',
-])}
+Pretty much any FiveM anticheat out there wants to claim they solve the cheater problem. Yet, instead, all they do is provide problems.
+FiveM anti-cheats have consistently shown to be a burnen on servers. They could break the server, break resources, implode performance, and more.
 Not even big companies can solve the cheater problem with an anti-cheat. Chances are, neither can these anti-cheats.
 ${bold('Here are a few alternatives we recommend:')}
 ${unorderedList([
