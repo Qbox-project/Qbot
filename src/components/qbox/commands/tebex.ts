@@ -6,19 +6,19 @@ import { createQuickReplyChatInputCommand } from '/utils/quick-reply.js';
 const links = {
     cdn: {
         name: 'CDN',
-        message: 'Check out our CDN:',
+        message: 'Check out our CDN',
     },
     'loki-logging': {
         name: 'Loki Logging',
-        message: 'Check out our Loki Logging:',
+        message: 'Check out our Loki Logging',
     },
     slots: {
         name: 'Casino Slots',
-        message: 'Check out our Casino Slots resource:',
+        message: 'Check out our Casino Slots resource',
     },
     'weapon-audio': {
         name: 'Weapon Audio',
-        message: 'Check out our Weapon Audio resource:',
+        message: 'Check out our Weapon Audio resource',
     },
 };
 
@@ -41,10 +41,10 @@ export const tebexCommand = createQuickReplyChatInputCommand({
     },
     withOptionalMention: true,
     message({ link }) {
-        const linkMessage = links[link as keyof typeof links];
+        const linkMessage = links[link as keyof typeof links].message;
 
         return {
-            content: `${linkMessage}${hideLinkEmbed(`${docsUrl}/tebex/${link}`)}`,
+            content: `${linkMessage}: ${hideLinkEmbed(`${docsUrl}/tebex/${link}`)}`,
         };
     },
 });
