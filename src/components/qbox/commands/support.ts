@@ -18,6 +18,7 @@ export const supportCommand = createQuickReplyChatInputCommand({
         integration_types: [ApplicationIntegrationType.GuildInstall],
     },
     guildSpecific: true,
+    withOptionalMention: true,
     message: { content },
 });
 
