@@ -1,5 +1,6 @@
 import { Component } from '../types.js';
 import { aboutCommand } from './commands/about.js';
+import { anticheatsCommand } from './commands/anticheats.js';
 import { builtinCommand } from './commands/builtin.js';
 import { compatCommand } from './commands/compat.js';
 import { deprecatedCommand } from './commands/deprecated.js';
@@ -19,6 +20,7 @@ import { tutorialCommand } from './commands/tutorial.js';
 export default {
     commands: [
         aboutCommand,
+        anticheatsCommand,
         builtinCommand,
         compatCommand,
         deprecatedCommand,
