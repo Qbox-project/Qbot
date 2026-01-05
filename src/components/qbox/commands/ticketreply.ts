@@ -39,7 +39,7 @@ export const ticketreplyCommand = createSubcommandsCommand(
             description: 'Ticket replies',
             contexts: [InteractionContextType.Guild],
             integration_types: [ApplicationIntegrationType.GuildInstall],
-            default_member_permissions: `${PermissionFlagsBits.ManageGuild}`,
+            default_member_permissions: `${PermissionFlagsBits.ManageRoles}`,
         },
         guildSpecific: true,
     },
