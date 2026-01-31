@@ -21,9 +21,9 @@
     "rss-to-json": "^2.1.1"
   },
   "devDependencies": {
-    "@types/node": "^24.10.1",
-    "prettier": "^3.6.2",
-    "rimraf": "^6.1.0",
+    "@types/node": "^25.1.0",
+    "prettier": "^3.8.1",
+    "rimraf": "^6.1.2",
     "tsc-alias": "^1.8.16",
     "typescript": "^5.9.3"
   }
