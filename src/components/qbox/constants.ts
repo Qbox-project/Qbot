@@ -1,6 +1,6 @@
 export const siteUrl = 'https://qbox.re';
 export const docsUrl = 'https://docs.qbox.re';
-export const oxUrl = 'https://coxdocs.dev';
+export const oxUrl = 'https://overextended.dev';
 export const fivemDocsUrl = 'https://docs.fivem.net/docs';
 export const fivemNativesUrl = 'https://docs.fivem.net/natives';
 export const fivemTosUrl = 'https://fivem.net/terms';

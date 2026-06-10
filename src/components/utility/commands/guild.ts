@@ -8,7 +8,7 @@ import { ChatInputCommand } from '/components/types.js';
 import { mapChatInputOptionValues } from '/utils/interactions.js';
 
 const invites: Record<string, string> = {
-    cox: 'https://discord.coxdocs.dev/',
+    cox: 'https://discord.overextended.dev/',
     'project-error': 'https://discord.gg/uy5N7jT5aJ',
     txAdmin: 'https://discord.gg/yWxjt9zPWR',
     cfx: 'https://discord.gg/fivem',
