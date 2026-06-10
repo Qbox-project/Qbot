@@ -11,6 +11,7 @@ import { mariadbCommand } from './commands/mariadb.js';
 import { motdCommand } from './commands/motd.js';
 import { onesyncCommand } from './commands/onesync.js';
 import { portsCommand } from './commands/ports.js';
+import { profilerCommand } from './commands/profiler.js';
 import { recipesCommand } from './commands/recipes.js';
 import { resourceCommand } from './commands/resource.js';
 import { supportCommand, supportMessageCommand } from './commands/support.js';
@@ -32,6 +33,7 @@ export default {
         motdCommand,
         onesyncCommand,
         portsCommand,
+        profilerCommand,
         recipesCommand,
         resourceCommand,
         supportCommand,
