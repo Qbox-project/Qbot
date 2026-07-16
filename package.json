@@ -13,12 +13,12 @@
   },
   "dependencies": {
     "@discordjs/collection": "^2.1.1",
-    "@discordjs/core": "^2.4.0",
+    "@discordjs/core": "^2.6.0",
     "@discordjs/formatters": "^0.6.2",
-    "@discordjs/rest": "^2.6.1",
+    "@discordjs/rest": "^2.6.2",
     "@discordjs/util": "^1.2.0",
     "@discordjs/ws": "^2.0.4",
-    "rss-to-json": "^2.1.1"
+    "fast-xml-parser": "^5.10.0"
   },
   "devDependencies": {
     "@types/node": "^25.9.2",

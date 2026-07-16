@@ -5,37 +5,77 @@ import {
     ApplicationCommandType,
 } from '@discordjs/core';
 import { hideLinkEmbed, inlineCode, userMention } from '@discordjs/formatters';
-import rss from 'rss-to-json';
+import { XMLParser } from 'fast-xml-parser';
 import { color, docsUrl } from '../constants.js';
 import { ChatInputCommand } from '/components/types.js';
 import { mapChatInputOptionValues } from '/utils/interactions.js';
 import { search } from '/utils/search.js';
 
+interface AtomText {
+    '#text'?: string;
+}
+
+interface AtomEntry {
+    author?: { name?: string };
+    id?: string;
+    link?: { href?: string };
+    summary?: AtomText | string;
+    title?: AtomText | string;
+}
+
+interface AtomDocument {
+    feed?: { entry?: AtomEntry | AtomEntry[] };
+}
+
+function getText(value: AtomText | string | undefined) {
+    return typeof value === 'string' ? value : value?.['#text'];
+}
+
 async function fetchFeed() {
-    const response = await rss.parse(`${docsUrl}/blog/atom.xml`);
+    const response = await fetch(`${docsUrl}/blog/atom.xml`, {
+        signal: AbortSignal.timeout(10_000),
+    });
 
-    const entries = response.items.map(
-        (x) =>
-            [
-                x.id.replace(`${docsUrl}/blog/`, ''),
-                {
-                    title: x.title,
-                    description: x.description,
-                    link: x.link,
-                    author: x.author,
-                },
-            ] as [
-                string,
-                {
-                    title: string;
-                    description: string;
-                    link: string;
-                    author: string;
-                },
-            ],
+    if (!response.ok) {
+        throw new Error(`Failed to fetch tutorial feed: ${response.status}`);
+    }
+
+    const body = await response.text();
+    if (Buffer.byteLength(body) > 1_000_000) {
+        throw new Error('Tutorial feed exceeds the maximum allowed size');
+    }
+
+    const document = new XMLParser({
+        attributeNamePrefix: '',
+        ignoreAttributes: false,
+        processEntities: false,
+    }).parse(body) as AtomDocument;
+    const items = document.feed?.entry;
+    const entries = Array.isArray(items) ? items : items ? [items] : [];
+
+    return new Map(
+        entries.flatMap((entry) => {
+            const id = entry.id?.replace(`${docsUrl}/blog/`, '');
+            const title = getText(entry.title);
+            const description = getText(entry.summary);
+            const link = entry.link?.href;
+            const author = entry.author?.name;
+
+            if (!id || !title || !description || !link || !author) return [];
+
+            return [
+                [
+                    id,
+                    {
+                        title,
+                        description,
+                        link,
+                        author,
+                    },
+                ],
+            ] as const;
+        }),
     );
-
-    return new Map(entries);
 }
 
 export const tutorialCommand = {

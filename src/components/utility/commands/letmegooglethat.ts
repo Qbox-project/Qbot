@@ -57,7 +57,7 @@ export const letmegooglethatCommand = {
             content: [
                 'Here, let me google that for you:',
                 hideLinkEmbed(
-                    `https://google.com/search?q=${encodeURI(query)}${type ? `&tbm=${type}` : ''}`,
+                    `https://google.com/search?q=${encodeURIComponent(query)}${type ? `&tbm=${type}` : ''}`,
                 ),
             ].join('\n'),
         });
