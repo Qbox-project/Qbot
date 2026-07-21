@@ -6,6 +6,7 @@ import { builtinCommand } from './commands/builtin.js';
 import { compatCommand } from './commands/compat.js';
 import { deprecatedCommand } from './commands/deprecated.js';
 import { docsCommand } from './commands/docs.js';
+import { enhancedCommand } from './commands/enhanced.js';
 import { gamehostsCommand } from './commands/gamehosts.js';
 import { mariadbCommand } from './commands/mariadb.js';
 import { motdCommand } from './commands/motd.js';
@@ -27,6 +28,7 @@ export default {
         builtinCommand,
         compatCommand,
         deprecatedCommand,
+        enhancedCommand,
         docsCommand,
         gamehostsCommand,
         mariadbCommand,
